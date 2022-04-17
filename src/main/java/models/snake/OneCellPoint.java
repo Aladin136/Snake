@@ -5,12 +5,12 @@ import main.GameSnake;
 import java.awt.*;
 import java.util.Random;
 
-public class Point extends GameSnake {
+public class OneCellPoint extends GameSnake {
     Random random = new Random();
     int x, y;
     Color color = DEFAULT_COLOR;
 
-    public Point(int x, int y) {
+    public OneCellPoint(int x, int y) {
         this.setXY(x, y);
     }
 

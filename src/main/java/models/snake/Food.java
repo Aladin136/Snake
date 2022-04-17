@@ -1,6 +1,6 @@
 package models.snake;
 
-public class Food extends Point {
+public class Food extends OneCellPoint {
     public Food(int x, int y) {
         super(x, y);
         this.color = FOOD_COLOR;

@@ -1,6 +1,7 @@
 package main;
 
 import models.snake.Food;
+import models.snake.OneCellPoint;
 import settings.Settings;
 import util.UtilForSnake;
 
@@ -94,12 +95,12 @@ public class GameSnake extends Settings {
     }
 
     class Snake {
-        ArrayList<Point> snake = new ArrayList<>();
+        ArrayList<OneCellPoint> snake = new ArrayList<>();
         int direction;
 
         public Snake(int x, int y, int length, int direction) {
             for (int i = 0; i < length; i++) {
-                Point point = new Point(x - i, y);
+                OneCellPoint point = new OneCellPoint(x - i, y);
                 snake.add(point);
             }
             this.direction = direction;
@@ -126,7 +127,7 @@ public class GameSnake extends Settings {
                 GAME_OVER = isInsideSnake(x, y);
             }
 
-            snake.add(0, new Point(x,y));
+            snake.add(0, new OneCellPoint(x,y));
             if (isFood(food)) {
                 food.eat();
                 frame.setTitle(TITLE_OF_PROGRAM + " : " + snake.size());
@@ -147,13 +148,13 @@ public class GameSnake extends Settings {
         }
 
         void paint (Graphics g) {
-            for (Point point : snake) {
+            for (OneCellPoint point : snake) {
                 point.paint(g);
             }
         }
 
         public boolean isInsideSnake(int x, int y) {
-            for (Point point : snake) {
+            for (OneCellPoint point : snake) {
                 if (point.getX() == x && point.getY() == y)
                     return true;
             }
@@ -161,57 +162,32 @@ public class GameSnake extends Settings {
         }
     }
 
-//    class Food extends Point {
+//    class OneCellPoint {
+//        int x, y;
+//        Color color = DEFAULT_COLOR;
 //
-//        public Food() {
-//            super(random.nextInt(0, FIELD_WIDTH-1), random.nextInt(0, FIELD_HEIGHT-1));
-//            this.color = FOOD_COLOR;
-//        }
-//
-//        void eat(){
-//            this.setXY(-1, -1);
-//        }
-//
-//        boolean isEating() {
-//            return this.getX() == -1;
-//        }
-//
-//        void next() {
-//            int x, y;
-//            do {
-//                x = random.nextInt(FIELD_WIDTH);
-//                y = random.nextInt(FIELD_HEIGHT);
-//            } while (snake.isInsideSnake(x, y));
+//        public OneCellPoint(int x, int y) {
 //            this.setXY(x, y);
 //        }
+//
+//        void paint(Graphics g) {
+//            g.setColor(color);
+//            g.fillOval(x * POINT_RADIUS, y * POINT_RADIUS, POINT_RADIUS, POINT_RADIUS);
+//        }
+//
+//        void setXY(int x, int y) {
+//            this.x = x;
+//            this.y = y;
+//        }
+//
+//        public int getX() {
+//            return x;
+//        }
+//
+//        public int getY() {
+//            return y;
+//        }
 //    }
-
-    class Point {
-        int x, y;
-        Color color = DEFAULT_COLOR;
-
-        public Point(int x, int y) {
-            this.setXY(x, y);
-        }
-
-        void paint(Graphics g) {
-            g.setColor(color);
-            g.fillOval(x * POINT_RADIUS, y * POINT_RADIUS, POINT_RADIUS, POINT_RADIUS);
-        }
-
-        void setXY(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
-        }
-    }
 
     public class Canvas extends JPanel {
         @Override

@@ -7,18 +7,18 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Snake extends Settings {
-    ArrayList<Point> snakePoints = new ArrayList<>();
+    ArrayList<OneCellPoint> snakePoints = new ArrayList<>();
     int direction;
 
     public Snake(int x, int y, int length, int direction) {
         for (int i = 0; i < length; i++) {
-            Point point = new Point(x - i, y);
+            OneCellPoint point = new OneCellPoint(x - i, y);
             snakePoints.add(point);
         }
         this.direction = direction;
     }
 
-    boolean isFood(Point food) {
+    boolean isFood(OneCellPoint food) {
         return (snakePoints.get(0).getX() == food.getX()) && (snakePoints.get(0).getY() == food.getY());
     }
 
@@ -44,7 +44,7 @@ public class Snake extends Settings {
 
         }
 
-        snakePoints.add(0, new Point(x,y));
+        snakePoints.add(0, new OneCellPoint(x,y));
         if (isFood(food)) {
             food.eat();
             frame.setTitle(TITLE_OF_PROGRAM + " : " + snakePoints.size());
@@ -65,7 +65,7 @@ public class Snake extends Settings {
     }
 
     public void paint(Graphics g) {
-        for (Point point : snakePoints) {
+        for (OneCellPoint point : snakePoints) {
             point.paint(g);
         }
     }
@@ -73,7 +73,7 @@ public class Snake extends Settings {
     int it;
     public boolean isInsideSnake(int x, int y) {
         it=0;
-        for (Point point : snakePoints) {
+        for (OneCellPoint point : snakePoints) {
             System.out.println(++it+")  ");
             if (x == point.getX()){
                 if (y == point.getY()){

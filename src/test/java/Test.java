@@ -88,18 +88,18 @@
 //    }
 //
 //    class Snake {
-//        ArrayList<Point> snake = new ArrayList<>();
+//        ArrayList<OneCellPoint> snake = new ArrayList<>();
 //        int direction;
 //
 //        public Snake(int x, int y, int length, int direction) {
 //            for (int i = 0; i < length; i++) {
-//                Point point = new Point(x - i, y);
+//                OneCellPoint point = new OneCellPoint(x - i, y);
 //                snake.add(point);
 //            }
 //            this.direction = direction;
 //        }
 //
-//        boolean isFood(Point food) {
+//        boolean isFood(OneCellPoint food) {
 //            return (snake.get(0).getX() == food.getX()) && (snake.get(0).getY() == food.getY());
 //        }
 //
@@ -120,7 +120,7 @@
 //                gameOver = isInsideSnake(x, y);
 //            }
 //
-//            snake.add(0, new Point(x,y));
+//            snake.add(0, new OneCellPoint(x,y));
 //            if (isFood(food)) {
 //                food.eat();
 //                frame.setTitle(TITLE_OF_PROGRAM + " : " + snake.size());
@@ -141,13 +141,13 @@
 //        }
 //
 //        void paint (Graphics g) {
-//            for (Point point : snake) {
+//            for (OneCellPoint point : snake) {
 //                point.paint(g);
 //            }
 //        }
 //
 //        public boolean isInsideSnake(int x, int y) {
-//            for (Point point : snake) {
+//            for (OneCellPoint point : snake) {
 //                if (point.getX() == x && point.getY() == y)
 //                    return true;
 //            }
@@ -155,7 +155,7 @@
 //        }
 //    }
 //
-//    class Food extends Point {
+//    class Food extends OneCellPoint {
 //
 //        public Food() {
 //            super(random.nextInt(0, FIELD_WIDTH-1), random.nextInt(0, FIELD_HEIGHT-1));
@@ -180,11 +180,11 @@
 //        }
 //    }
 //
-//    class Point {
+//    class OneCellPoint {
 //        int x, y;
 //        Color color = DEFAULT_COLOR;
 //
-//        public Point(int x, int y) {
+//        public OneCellPoint(int x, int y) {
 //            this.setXY(x, y);
 //        }
 //
