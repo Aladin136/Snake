@@ -3,10 +3,8 @@ package models.snake;
 import main.GameSnake;
 
 import java.awt.*;
-import java.util.Random;
 
 public class OneCellPoint extends GameSnake {
-    Random random = new Random();
     int x, y;
     Color color = DEFAULT_COLOR;
 
@@ -38,5 +36,10 @@ public class OneCellPoint extends GameSnake {
 
     public int getY() {
         return y;
+    }
+
+    @Override
+    public String toString() {
+        return this.x + ":" + this.y + " " + this.color ;
     }
 }

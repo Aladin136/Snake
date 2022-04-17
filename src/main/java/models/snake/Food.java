@@ -24,4 +24,8 @@ public class Food extends OneCellPoint {
 
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

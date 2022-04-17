@@ -1,16 +1,16 @@
 package models.snake;
 
-import settings.Settings;
+import enums.Sides;
+import main.GameSnake;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Snake extends Settings {
+public class Snake extends GameSnake {
     ArrayList<OneCellPoint> snakePoints = new ArrayList<>();
-    int direction;
+    Sides direction;
 
-    public Snake(int x, int y, int length, int direction) {
+    public Snake(int x, int y, int length, Sides direction) {
         for (int i = 0; i < length; i++) {
             OneCellPoint point = new OneCellPoint(x - i, y);
             snakePoints.add(point);
@@ -18,30 +18,35 @@ public class Snake extends Settings {
         this.direction = direction;
     }
 
-    boolean isFood(OneCellPoint food) {
+    boolean isFood(Food food) {
         return (snakePoints.get(0).getX() == food.getX()) && (snakePoints.get(0).getY() == food.getY());
     }
 
-    public void move(Food food, JFrame frame, Snake snake) {
+    public void move() {
         int x = snakePoints.get(0).getX();
         int y = snakePoints.get(0).getY();
-        if (direction == LEFT) {x--;}
-        if (direction == RIGHT) {x++;}
-        if (direction == UP) {y--;}
-        if (direction == DOWN) {y++;}
+        switch (direction){
+            case UP -> y--;
+            case DOWN -> y++;
+            case LEFT -> x--;
+            case RIGHT -> x++;
+        }
+//        if (direction == LEFT) {x--;}
+//        if (direction == RIGHT) {x++;}
+//        if (direction == UP) {y--;}
+//        if (direction == DOWN) {y++;}
 
-        if (x > FIELD_WIDTH - 1) {x = 0;}
-        if (x < 0) {x = FIELD_WIDTH - 1;}
-        if (y > FIELD_HEIGHT - 1) {y = 0;}
-        if (y < 0) {y = FIELD_HEIGHT - 1;}
+        if (DEATH_BOARDS){
+            GAME_OVER = true;
+        } else {
+            if (x > FIELD_WIDTH - 1) {x = 0;}
+            if (x < 0) {x = FIELD_WIDTH - 1;}
+            if (y > FIELD_HEIGHT - 1) {y = 0;}
+            if (y < 0) {y = FIELD_HEIGHT - 1;}
+        }
 
         if (CHECK_FOR_ACROSS){
-            if (isInsideSnake(x, y)){
-                GAME_OVER = true;
-                System.out.println("GAME_OVER");
-                System.out.println(GAME_OVER);
-            }
-
+            GAME_OVER = isInsideSnake(x, y);
         }
 
         snakePoints.add(0, new OneCellPoint(x,y));
@@ -55,12 +60,15 @@ public class Snake extends Settings {
 
     }
 
-    public void setDirection(int direction) {
-        if (direction >=LEFT && direction <= DOWN) {
-            if (direction == LEFT && this.direction != RIGHT){this.direction = direction;}
-            if (direction == UP && this.direction != DOWN){this.direction = direction;}
-            if (direction == RIGHT && this.direction != LEFT){this.direction = direction;}
-            if (direction == DOWN && this.direction != UP){this.direction = direction;}
+    public void setDirection(int keyKode) {
+        if ((keyKode >= 37 && keyKode <= 40) ||
+                ((keyKode == 65)||(keyKode == 87)||(keyKode == 68)||(keyKode == 83))) {
+            switch (keyKode){
+                case 37, 65 -> direction = Sides.LEFT;
+                case 38, 87 -> direction = Sides.UP;
+                case 39, 68 -> direction = Sides.RIGHT;
+                case 40, 83 -> direction = Sides.DOWN;
+            }
         }
     }
 
@@ -70,19 +78,9 @@ public class Snake extends Settings {
         }
     }
 
-    int it;
     public boolean isInsideSnake(int x, int y) {
-        it=0;
         for (OneCellPoint point : snakePoints) {
-            System.out.println(++it+")  ");
-            if (x == point.getX()){
-                if (y == point.getY()){
-
-                    System.out.println("=======================================");
-                }
-            }
             if (point.getX() == x && point.getY() == y)
-                System.out.println("truesssss");
                 return true;
         }
         return false;
