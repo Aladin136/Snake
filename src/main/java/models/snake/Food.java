@@ -11,8 +11,7 @@ public class Food extends OneCellPoint {
         do {
             x = random.nextInt(FIELD_WIDTH);
             y = random.nextInt(FIELD_HEIGHT);
-        } while (false);
-//        (snake.isInsideSnake(x, y));
+        } while (snake.isInsideSnake(x, y));
         this.setXY(x, y);
     }
 
@@ -24,8 +23,4 @@ public class Food extends OneCellPoint {
 
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

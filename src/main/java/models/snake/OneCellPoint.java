@@ -17,14 +17,6 @@ public class OneCellPoint extends GameSnake {
         g.fillOval(x * POINT_RADIUS, y * POINT_RADIUS, POINT_RADIUS, POINT_RADIUS);
     }
 
-    public  int getRandomX(){
-        return random.nextInt(FIELD_WIDTH - 1);
-    }
-
-    public int[] getRandomXY() {
-        return new int[]{random.nextInt(FIELD_WIDTH - 1), random.nextInt(FIELD_HEIGHT - 1)};
-    }
-
     void setXY(int x, int y) {
         this.x = x;
         this.y = y;

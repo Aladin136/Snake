@@ -3,6 +3,7 @@ package main;
 import models.snake.Food;
 import models.snake.Snake;
 import settings.Settings;
+import util.AutoPilot;
 import util.UtilForSnake;
 
 import javax.swing.*;
@@ -28,14 +29,19 @@ public class GameSnake extends Settings {
     void go() {
         GAME_OVER = false;
         food = new Food(util.getRandomX(), util.getRandomY());
-        snake = new Snake(START_SNAKE_X, START_SNAKE_Y,
-                START_SNAKE_SIZE, START_SNAKE_DIRECTION);
+        if (AUTOPILOT){
+            snake = new AutoPilot(START_SNAKE_X, START_SNAKE_Y,
+                    START_SNAKE_SIZE, START_SNAKE_DIRECTION);
+        } else {
+            snake = new Snake(START_SNAKE_X, START_SNAKE_Y,
+                    START_SNAKE_SIZE, START_SNAKE_DIRECTION);
+        }
 
 
         frame = new JFrame(TITLE_OF_PROGRAM + " : " + START_SNAKE_SIZE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(FIELD_WIDTH * POINT_RADIUS + FIELD_DX,
-                FIELD_HEIGHT * POINT_RADIUS + FIELD_DY);
+        frame.setSize((FIELD_WIDTH+1) * POINT_RADIUS + FIELD_DX,
+                (FIELD_HEIGHT+1) * POINT_RADIUS + FIELD_DY);
         frame.setLocation(START_LOCATION, START_LOCATION);
         frame.setResizable(RESIZABLE);
 

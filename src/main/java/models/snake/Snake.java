@@ -3,7 +3,7 @@ package models.snake;
 import enums.Sides;
 import main.GameSnake;
 
-import java.awt.*;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Snake extends GameSnake {
@@ -22,19 +22,35 @@ public class Snake extends GameSnake {
         return (snakePoints.get(0).getX() == food.getX()) && (snakePoints.get(0).getY() == food.getY());
     }
 
+    protected int getHeadSnakeX(){
+        return snakePoints.get(0).getX();
+    }
+
+    protected int getHeadSnakeY(){
+        return snakePoints.get(0).getY();
+    }
+
+    public Sides getDirection(){
+        return this.direction;
+    }
+    public void setDirection(Sides direction){
+        this.direction = direction;
+    }
+
     public void move() {
         int x = snakePoints.get(0).getX();
         int y = snakePoints.get(0).getY();
+
+        if (AUTOPILOT){
+            this.setDirection(0);
+        }
+
         switch (direction){
             case UP -> y--;
             case DOWN -> y++;
             case LEFT -> x--;
             case RIGHT -> x++;
         }
-//        if (direction == LEFT) {x--;}
-//        if (direction == RIGHT) {x++;}
-//        if (direction == UP) {y--;}
-//        if (direction == DOWN) {y++;}
 
         if (DEATH_BOARDS){
             GAME_OVER = true;
@@ -56,8 +72,6 @@ public class Snake extends GameSnake {
         } else {
             snakePoints.remove(snakePoints.size()-1);
         }
-
-
     }
 
     public void setDirection(int keyKode) {
@@ -73,9 +87,13 @@ public class Snake extends GameSnake {
     }
 
     public void paint(Graphics g) {
-        for (OneCellPoint point : snakePoints) {
-            point.paint(g);
+        try {
+            for (OneCellPoint point : snakePoints) {
+                point.paint(g);
+            }
+        } catch (Exception ignored){
         }
+
     }
 
     public boolean isInsideSnake(int x, int y) {
