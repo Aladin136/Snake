@@ -8,15 +8,15 @@ public class Settings {
     public static final String TITLE_OF_PROGRAM = "Classic Game Snake";
     public static final String GAME_OVER_MSG = "GAME OVER";
     public static final int POINT_RADIUS = 20; //in pix
-    public static final int FIELD_WIDTH = 30; //in point
-    public static final int FIELD_HEIGHT = 20; //in point
+    public static final int FIELD_WIDTH = 40; //in point
+    public static final int FIELD_HEIGHT = 30; //in point
     public static final int FIELD_DX = 0;
     public static final int FIELD_DY = 20;
     public static final int START_LOCATION = 200;
 
     public static final int START_SNAKE_SIZE = 8;
-    public static final int START_SNAKE_X = 10;
-    public static final int START_SNAKE_Y = 10;
+    public static final int START_SNAKE_X = FIELD_WIDTH/2;
+    public static final int START_SNAKE_Y = FIELD_HEIGHT/2;
     public static final Sides START_SNAKE_DIRECTION = Sides.RIGHT;
 
     public static final Color DEFAULT_COLOR = Color.BLACK;

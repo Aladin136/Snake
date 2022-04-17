@@ -12,7 +12,7 @@ public class Snake extends GameSnake {
 
     public Snake(int x, int y, int length, Sides direction) {
         for (int i = 0; i < length; i++) {
-            OneCellPoint point = new OneCellPoint(x - i, y);
+            OneCellPoint point = new OneCellPoint(x, y);
             snakePoints.add(point);
         }
         this.direction = direction;
