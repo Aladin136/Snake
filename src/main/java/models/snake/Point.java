@@ -1,11 +1,11 @@
 package models.snake;
 
-import settings.Settings;
+import main.GameSnake;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Point extends Settings {
+public class Point extends GameSnake {
     Random random = new Random();
     int x, y;
     Color color = DEFAULT_COLOR;

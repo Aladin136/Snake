@@ -6,12 +6,13 @@ public class Food extends Point {
         this.color = FOOD_COLOR;
     }
 
-    void eat(Snake snake){
+    public void eat(){
         int x, y;
         do {
             x = random.nextInt(FIELD_WIDTH);
             y = random.nextInt(FIELD_HEIGHT);
-        } while (snake.isInsideSnake(x, y));
+        } while (false);
+//        (snake.isInsideSnake(x, y));
         this.setXY(x, y);
     }
 

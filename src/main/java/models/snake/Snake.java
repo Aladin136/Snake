@@ -46,7 +46,7 @@ public class Snake extends Settings {
 
         snakePoints.add(0, new Point(x,y));
         if (isFood(food)) {
-            food.eat(snake);
+            food.eat();
             frame.setTitle(TITLE_OF_PROGRAM + " : " + snakePoints.size());
         } else {
             snakePoints.remove(snakePoints.size()-1);

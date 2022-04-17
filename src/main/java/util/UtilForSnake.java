@@ -5,7 +5,7 @@ import settings.Settings;
 import java.util.Random;
 
 
-public class Util extends Settings {
+public class UtilForSnake extends Settings {
     Random random = new Random();
 
     public int getRandomX(){
