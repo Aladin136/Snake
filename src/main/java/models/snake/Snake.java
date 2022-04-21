@@ -34,7 +34,18 @@ public class Snake extends GameSnake {
         return this.direction;
     }
     public void setDirection(Sides direction){
-        this.direction = direction;
+            if (this.direction == Sides.LEFT && direction != Sides.RIGHT){
+                this.direction = direction;
+            }
+            if (this.direction == Sides.UP && direction != Sides.DOWN){
+                this.direction = direction;
+            }
+            if (this.direction == Sides.RIGHT && direction != Sides.LEFT){
+                this.direction = direction;
+            }
+            if (this.direction == Sides.DOWN && direction != Sides.UP){
+                this.direction = direction;
+            }
     }
 
     public void move() {
@@ -53,7 +64,10 @@ public class Snake extends GameSnake {
         }
 
         if (DEATH_BOARDS){
-            GAME_OVER = true;
+            if (x > FIELD_WIDTH - 1) {GAME_OVER = true;}
+            if (x < 0) {GAME_OVER = true;}
+            if (y > FIELD_HEIGHT - 1) {GAME_OVER = true;}
+            if (y < 0) {GAME_OVER = true;}
         } else {
             if (x > FIELD_WIDTH - 1) {x = 0;}
             if (x < 0) {x = FIELD_WIDTH - 1;}
@@ -78,10 +92,26 @@ public class Snake extends GameSnake {
         if ((keyKode >= 37 && keyKode <= 40) ||
                 ((keyKode == 65)||(keyKode == 87)||(keyKode == 68)||(keyKode == 83))) {
             switch (keyKode){
-                case 37, 65 -> direction = Sides.LEFT;
-                case 38, 87 -> direction = Sides.UP;
-                case 39, 68 -> direction = Sides.RIGHT;
-                case 40, 83 -> direction = Sides.DOWN;
+                case 37, 65 -> {
+                    if (direction != Sides.RIGHT){
+                        direction = Sides.LEFT;
+                    }
+                }
+                case 38, 87 -> {
+                    if (direction != Sides.DOWN){
+                        direction = Sides.UP;
+                    }
+                }
+                case 39, 68 -> {
+                    if (direction != Sides.LEFT){
+                        direction = Sides.RIGHT;
+                    }
+                }
+                case 40, 83 -> {
+                    if (direction != Sides.UP){
+                        direction = Sides.DOWN;
+                    }
+                }
             }
         }
     }

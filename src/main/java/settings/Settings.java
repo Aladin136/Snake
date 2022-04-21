@@ -13,8 +13,8 @@ public class Settings {
     public static final int FIELD_DX = 0;
     public static final int FIELD_DY = 20;
     public static final int START_LOCATION = 200;
+    public static boolean GAME_OVER;
 
-    public static final int START_SNAKE_SIZE = 8;
     public static final int START_SNAKE_X = FIELD_WIDTH/2;
     public static final int START_SNAKE_Y = FIELD_HEIGHT/2;
     public static final Sides START_SNAKE_DIRECTION = Sides.RIGHT;
@@ -24,12 +24,14 @@ public class Settings {
     public static final Color POISON_COLOR = Color.RED;
     public static final Color BACKGROUND_COLOR = Color.WHITE;
 
-    public static final int SHOW_DELAY = 20;
+    public static final int START_SNAKE_SIZE = 4;
+    public static final int SNAKE_AMOUNT = 1;
+    public static final int SHOW_DELAY = 100;
+    public static final int FOOD_AMOUNT = 2;
     public static boolean RESIZABLE = false;
-    public static boolean GAME_OVER;
     public static boolean CHECK_FOR_ACROSS = false;
-    public static boolean DEATH_BOARDS = false;
-    public static boolean AUTOPILOT = true;
+    public static boolean DEATH_BOARDS = true;
+    public static boolean AUTOPILOT = false;
 
 
 
