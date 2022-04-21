@@ -5,6 +5,7 @@ import main.GameSnake;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Snake extends GameSnake {
     ArrayList<OneCellPoint> snakePoints = new ArrayList<>();
@@ -18,8 +19,14 @@ public class Snake extends GameSnake {
         this.direction = direction;
     }
 
-    boolean isFood(Food food) {
-        return (snakePoints.get(0).getX() == food.getX()) && (snakePoints.get(0).getY() == food.getY());
+    boolean isFood(List<Food> foodList) {
+        for(Food food : foodList) {
+            if ((snakePoints.get(0).getX() == food.getX()) && (snakePoints.get(0).getY() == food.getY())){
+                food.eat();
+                return true;
+            }
+        }
+        return false;
     }
 
     protected int getHeadSnakeX(){
@@ -28,6 +35,10 @@ public class Snake extends GameSnake {
 
     protected int getHeadSnakeY(){
         return snakePoints.get(0).getY();
+    }
+
+    public List<OneCellPoint> getPointsList(){
+        return this.snakePoints;
     }
 
     public Sides getDirection(){
@@ -46,6 +57,10 @@ public class Snake extends GameSnake {
             if (this.direction == Sides.DOWN && direction != Sides.UP){
                 this.direction = direction;
             }
+    }
+
+    public OneCellPoint getHead() {
+        return snakePoints.get(0);
     }
 
     public void move() {
@@ -80,12 +95,12 @@ public class Snake extends GameSnake {
         }
 
         snakePoints.add(0, new OneCellPoint(x,y));
-        if (isFood(food)) {
-            food.eat();
+        if (isFood(foodList)) {
             frame.setTitle(TITLE_OF_PROGRAM + " : " + snakePoints.size());
         } else {
-            snakePoints.remove(snakePoints.size()-1);
+            snakePoints.remove(snakePoints.size() - 1);
         }
+
     }
 
     public void setDirection(int keyKode) {

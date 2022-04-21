@@ -10,16 +10,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameSnake extends Settings {
 
     public static Snake snake;
-    public static Food food;
+    public static List<Food> foodList = new ArrayList<>();
     //    Poison poison;
     public static JFrame frame;
     public static Canvas canvasPanel;
-    public static Random random = new Random();
     public static UtilForSnake util = new UtilForSnake();
 
     public static void main(String[] args) {
@@ -28,13 +28,17 @@ public class GameSnake extends Settings {
 
     void go() {
         GAME_OVER = false;
-        food = new Food(util.getRandomX(), util.getRandomY());
+        GAME_WINED = false;
         if (AUTOPILOT){
             snake = new AutoPilot(START_SNAKE_X, START_SNAKE_Y,
                     START_SNAKE_SIZE, START_SNAKE_DIRECTION);
         } else {
             snake = new Snake(START_SNAKE_X, START_SNAKE_Y,
                     START_SNAKE_SIZE, START_SNAKE_DIRECTION);
+        }
+        for (int i = 0; i < FOOD_AMOUNT; i++) {
+            int[] randomXY = util.getRandomXY();
+            foodList.add(new Food(randomXY[0], randomXY[1]));
         }
 
 
@@ -57,11 +61,12 @@ public class GameSnake extends Settings {
         });
 
         frame.setVisible(true);
-
-        while (!GAME_OVER) {
+        while (!GAME_OVER && !GAME_WINED) {
             snake.move();
-            if (food.isEating()){
-                food.next();
+            for(Food food : foodList){
+                if (food.isEating()){
+                    food.next();
+                }
             }
             canvasPanel.repaint();
             try {
@@ -77,12 +82,21 @@ public class GameSnake extends Settings {
         public void paint(Graphics g) {
             super.paint(g) ;
             snake.paint(g);
-            food.paint(g);
+            for(Food food : foodList) {
+                food.paint(g);
+            }
             if (GAME_OVER) {
                 g.setColor(Color.RED);
-                g.setFont(new Font("Arial", Font.BOLD, 40));
+                g.setFont(new Font("Arial", Font.BOLD, 80));
                 FontMetrics fontMetrics = g.getFontMetrics();
                 g.drawString(GAME_OVER_MSG, (FIELD_WIDTH * POINT_RADIUS - fontMetrics.stringWidth(GAME_OVER_MSG))/2,
+                        (FIELD_HEIGHT * POINT_RADIUS)/2);
+            }
+            if (GAME_WINED) {
+                g.setColor(Color.GREEN);
+                g.setFont(new Font("Arial", Font.BOLD, 80));
+                FontMetrics fontMetrics = g.getFontMetrics();
+                g.drawString(GAME_WINED_MSG, (FIELD_WIDTH * POINT_RADIUS - fontMetrics.stringWidth(GAME_WINED_MSG))/2,
                         (FIELD_HEIGHT * POINT_RADIUS)/2);
             }
         }

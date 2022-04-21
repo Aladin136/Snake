@@ -6,13 +6,17 @@ public class Food extends OneCellPoint {
         this.color = FOOD_COLOR;
     }
 
+    public static boolean isInsideFoodList(int x, int y) {
+        for (OneCellPoint point : foodList) {
+            if (point.getX() == x && point.getY() == y)
+                return true;
+        }
+        return false;
+    }
+
     public void eat(){
-        int x, y;
-        do {
-            x = random.nextInt(FIELD_WIDTH);
-            y = random.nextInt(FIELD_HEIGHT);
-        } while (snake.isInsideSnake(x, y));
-        this.setXY(x, y);
+        int[] XY = util.getRandomXY();
+        this.setXY(XY[0], XY[1]);
     }
 
     public boolean isEating() {
